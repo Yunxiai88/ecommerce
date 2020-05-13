@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    ...
+</head>
+
+<body>
+    <div th:fragment="header">
+        <div class="d-flex header-bg mb-4">
+            <div class="mr-auto p-2">
+                <a href="/">
+                    <img th:src="@{/img/home.png}" />
+                </a>
+            </div>
+            <div class="p-2">
+                <a th:href="@{/carts}">Shopping Cart</a>
+            </div>
+            <div class="p-2" sec:authorize="isAnonymous()">
+                <a th:href="@{/login}">Login</a>
+            </div>
+            <div class="p-2" sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Logout</a>
+            </div>
+            <div class="p-2" sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/product}">Create Product</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

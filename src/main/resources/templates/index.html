@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+
+<head>
+  <title>Welcome to SISTIC Online Shopping</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container">
+      <h3 class="h3">Online Products</h3>
+      <div class="row">
+        <div th:each="product, itr: ${products}" class="col-md-3 col-sm-6">
+          <form action="#" th:id="${'form' + itr.index}" method="POST">
+            <input type="hidden" th:name="pid" th:value="${product.id}" />
+            <div class="product-grid">
+              <div class="product-image">
+                <a href="#">
+                  <img class="pic-1" th:if="${product.image}" th:src="@{'/images/'+${product.image}}" />
+                  <img class="pic-1" th:unless="${product.image}" th:src="@{'/images/blank.png'}" />
+                </a>
+              </div>
+              <div class="product-content">
+                <h3 class="title">
+                  <a href="#" th:text="${product.name}"></a>
+                </h3>
+                <div class="price">
+                  $[[${product.price}]]
+                  <span>stock:[[${product.quantity}]]</span>
+                </div>
+                <a class="add-to-cart AS-POST" th:id="${itr.index}" th:href="@{/order-details}"
+                  sec:authorize="isAuthenticated()">
+                  + Add To Cart
+                </a>
+
+                <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger AS-POST"
+                  th:href="@{'/products/'+${product.id}}">Edit</a>
+
+                <a sec:authorize="hasRole('ADMIN')" th:id="${product.id}" class="btn btn-danger delete-item">
+                  Delete
+                </a>
+              </div>
+            </div>
+          </form>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

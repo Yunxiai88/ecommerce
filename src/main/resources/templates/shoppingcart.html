@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+
+<head>
+  <title>Product Details</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+          <form th:action="@{/order-details}" method="POST">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th class="text-center">Price</th>
+                  <th class="text-center">Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="item : ${items}">
+                  <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                      <a class="thumbnail pull-left" href="#">
+                        <img class="media-object" th:src="@{'/images/'+${cart.product.image}}"
+                          style="width: 72px; height: 72px;" />
+                      </a>
+                      <div class="media-body">
+                        <h4 class="media-heading">
+                          <a href="#" th:text="${item.product.name}">Product name</a>
+                        </h4>
+                        <h5 class="media-heading">
+                          by <a href="#" th:text="${item.order.user.name}">Brand name</a>
+                        </h5>
+                        <span>Status: </span>
+                        <span class="text-success">
+                          <strong th:text="${item.product.quantity}? 'in stock': 'out stock'">In Stock</strong></span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="col-sm-1 col-md-1" style="text-align: center;">
+                    <input type="text" class="form-control cal-count" th:id="${item.id}" th:value="${item.count}" />
+                  </td>
+                  <td class="col-sm-1 col-md-1 text-center">
+                    <strong th:id="@{'price'+${item.id}}" th:text="'$'+${item.product.price}"></strong>
+                  </td>
+                  <td class="col-sm-1 col-md-1 text-center">
+                    <strong th:id="@{'total'+${item.id}}" th:text="'$'+${item.amount}"
+                      th:value="${item.amount}"></strong>
+                  </td>
+                  <td class="col-sm-1 col-md-1">
+                    <a th:href="@{'/item/delete/'+${item.id}}" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-remove"></span> Remove
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h3>Total</h3>
+                  </td>
+                  <td class="text-right">
+                    <h3>
+                      <strong id="calAmount"></strong>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button type="submit" class="btn btn-success">
+                      Checkout <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
