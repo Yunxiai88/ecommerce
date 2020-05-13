@@ -29,6 +29,18 @@
       })
 
       totalAmount()
+
+      $("#submit").click(function (e) {
+        var itemNo = $('.media-body').length
+        if (itemNo === 0) {
+          e.preventDefault()
+          return false
+        } else {
+          e.submit()
+        }
+      })
+
+
     },
   };
 
@@ -37,7 +49,7 @@
 
 function updateCartCount(cid, count, callback) {
   $.ajax({
-    url: '/carts/' + cid,
+    url: '/items/' + cid,
     data: {
       'count': count
     },
@@ -58,5 +70,5 @@ function totalAmount() {
     allmount = allmount + aa;
   });
 
-  $("#calAmount").html('$' + allmount)
+  $("#calAmount").html('$' + allmount.toFixed(2))
 }

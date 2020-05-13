@@ -7,7 +7,59 @@
 
 <body>
     <div layout:fragment="content">
-        
+        <div>
+            <div class="purchase container">
+                <main>
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-3 to-details">
+                            <div>Purchase Order For :</div>
+                            <strong class="to-name">[[${order.user.name}]]</strong>
+                            <div class="to-address">[[${order.user.address}]]</div>
+                            <div class="to-city">&nbsp;</div>
+                        </div>
+                        <div class="col-sm-9 col-xs-9 purchase-info">
+                            <h4 class="info-code">[[${order.orderId}]]</h4>
+                            <div class="info-date">Issued : [[${order.createDate}]]</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 table-responsive">
+                            <table class="table table-condensed" border="0" cellspacing="0" cellpadding="0"
+                                width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-xs-1 col-sm-1">#</th>
+                                        <th class="text-center col-xs-7 col-sm-7">Description</th>
+                                        <th class="text-center col-xs-1 col-sm-1">Qty</th>
+                                        <th class="text-center col-xs-3 col-sm-3">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="item, itr : ${order.orderDetails}">
+                                        <tr>
+                                            <td class="col-xs-1 col-sm-1 text-center">[[${itr.index + 1}]]</td>
+                                            <td class="text-center">[[${item.title}]]</td>
+                                            <td class="text-center">[[${item.count}]]</td>
+                                            <td class="text-right">[[${item.amount}]]</td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2">
+                                            Information<br>
+                                            Information content
+                                        </th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-right">[[${order.amount}]]</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
     </div>
 </body>
 

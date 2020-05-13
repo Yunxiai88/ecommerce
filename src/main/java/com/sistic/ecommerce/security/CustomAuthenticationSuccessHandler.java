@@ -28,16 +28,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-        Map<String, String> roleUrlMap = new HashMap<>();
-        roleUrlMap.put("CUSTOMER", "/index");
-        roleUrlMap.put("ADMIN", "/index");
+        Map<String, String> roleMap = new HashMap<>();
+        roleMap.put("CUSTOMER", "/index");
+        roleMap.put("ADMIN", "/index");
 
         String targetUrl = "";
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             String authority = grantedAuthority.getAuthority();
-            if (roleUrlMap.containsKey(authority)) {
-                targetUrl = roleUrlMap.get(authority);
+            if (roleMap.containsKey(authority)) {
+                targetUrl = roleMap.get(authority);
             }
         }
 

@@ -29,17 +29,16 @@
                   $[[${product.price}]]
                   <span>stock:[[${product.quantity}]]</span>
                 </div>
-                <a class="add-to-cart AS-POST" th:id="${itr.index}" th:href="@{/order-details}"
-                  sec:authorize="isAuthenticated()">
-                  + Add To Cart
-                </a>
+                <div sec:authorize="hasRole('ADMIN')">
+                  <a class="add-to-cart AS-POST" th:id="${itr.index}" th:href="@{/items}">
+                    + Add To Cart</a>
+                </div>
 
-                <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger AS-POST"
-                  th:href="@{'/products/'+${product.id}}">Edit</a>
+                <div sec:authorize="hasRole('ADMIN')">
+                  <a class="btn btn-danger AS-POST" th:href="@{'/products/'+${product.id}}">Edit</a>
 
-                <a sec:authorize="hasRole('ADMIN')" th:id="${product.id}" class="btn btn-danger delete-item">
-                  Delete
-                </a>
+                  <a href="" th:id="${product.id}" class="btn btn-danger delete-item">Delete</a>
+                </div>
               </div>
             </div>
           </form>

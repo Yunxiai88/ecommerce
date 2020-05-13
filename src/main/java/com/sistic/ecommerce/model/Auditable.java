@@ -29,4 +29,36 @@ public class Auditable<U> {
     @LastModifiedDate
     @Column(name = "update_date", nullable = true)
     private Date updateDate;
+
+    public U getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(U createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public U getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(U updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 }

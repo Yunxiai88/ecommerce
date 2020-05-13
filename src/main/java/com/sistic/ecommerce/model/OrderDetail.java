@@ -1,6 +1,7 @@
 package com.sistic.ecommerce.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "order_details")
 public class OrderDetail extends Auditable<String> {
@@ -16,7 +19,8 @@ public class OrderDetail extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Order_ID", referencedColumnName = "ID")
     private Order order;
 
@@ -27,8 +31,10 @@ public class OrderDetail extends Auditable<String> {
     private String title;
     private String image;
     private Integer count;
-    private Float price;
-    private Float amount;
+    private float price;
+
+    @Column(columnDefinition = "NUMBER DEFAULT 0.0")
+    private float amount;
 
     public Long getId() {
         return id;
@@ -78,19 +84,19 @@ public class OrderDetail extends Auditable<String> {
         this.count = count;
     }
 
-    public Float getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public Float getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

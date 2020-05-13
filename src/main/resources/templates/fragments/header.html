@@ -14,15 +14,19 @@
                 </a>
             </div>
             <div class="p-2">
-                <a th:href="@{/carts}">Shopping Cart</a>
+                <a th:href="@{/items}">Shopping Cart</a>
             </div>
             <div class="p-2" sec:authorize="isAnonymous()">
                 <a th:href="@{/login}">Login</a>
             </div>
             <div class="p-2" sec:authorize="isAuthenticated()">
                 <a th:href="@{/logout}">Logout</a>
+                <div style="color: aliceblue;">
+                    Logged as: <span sec:authentication="name"></span> |
+                    Roles: <span sec:authentication="principal.authorities"></span>
+                </div>
             </div>
-            <div class="p-2" sec:authorize="hasRole('ADMIN')">
+            <div sec:authorize-expr="${hasRole('ADMIN')}">
                 <a th:href="@{/product}">Create Product</a>
             </div>
         </div>
