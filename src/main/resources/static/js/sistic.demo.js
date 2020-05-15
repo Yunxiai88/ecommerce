@@ -39,8 +39,6 @@
           e.submit()
         }
       })
-
-
     },
   };
 
@@ -71,4 +69,8 @@ function totalAmount() {
   });
 
   $("#calAmount").html('$' + allmount.toFixed(2))
+}
+
+function back() {
+  window.history.back();
 }

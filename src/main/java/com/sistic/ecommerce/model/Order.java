@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -26,13 +28,14 @@ public class Order extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "ORDER_ID", nullable = false)
+    @Column(name = "ORDER_ID", nullable = true)
     private String orderId;
 
     @Transient
-    public String generateOrderId() {
+    @PostPersist
+    public void generateOrderId() {
         DecimalFormat formatter = new DecimalFormat("ORDER-000000");
-        return formatter.format(id);
+        orderId = formatter.format(id);
     }
 
     @Column(name = "AMOUNT", nullable = true)

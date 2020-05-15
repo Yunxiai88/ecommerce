@@ -62,7 +62,6 @@ public class OrderDetailService {
             order = new Order();
             order.setStatus(0);
             order.setUser(user);
-            order.setOrderId(order.generateOrderId());
             orderRepository.save(order);
             customSessionScope.setOrder(order);
         }

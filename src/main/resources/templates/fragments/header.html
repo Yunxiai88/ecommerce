@@ -26,9 +26,9 @@
                     Roles: <span sec:authentication="principal.authorities"></span>
                 </div>
             </div>
-            <div sec:authorize-expr="${hasRole('ADMIN')}">
+            <!--<div sec:authorize-expr="${hasRole('ADMIN')}">-->
                 <a th:href="@{/product}">Create Product</a>
-            </div>
+            <!--</div>-->
         </div>
     </div>
 </body>
